@@ -27,3 +27,5 @@ Route::get('/console/logout', [ConsoleController::class, 'logout'])->middleware(
 
 Route::get('/console/types/list', [TypesController::class, 'list'])->middleware('auth');
 Route::get('/console/types/delete/{type:id}', [TypesController::class, 'delete'])->where('type', '[0-9]+')->middleware('auth');
+Route::get('/console/types/add', [TypesController::class, 'addForm'])->middleware('auth');
+Route::post('/console/types/add', [TypesController::class, 'add'])->middleware('auth');

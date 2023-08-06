@@ -24,4 +24,22 @@ class TypesController extends Controller
         return redirect('/console/types/list')
             ->with('message', 'Type has been deleted.');
     }
+
+    public function addForm()
+    {
+        return view('types.add');
+    }
+
+    public function add()
+    {
+        $attribute = request() -> validate([
+            'title' => 'required'
+        ]);
+        $type = new Type();
+        $type->title = $attribute['title'];
+        $type->save();
+
+        return redirect('/console/types/list')
+            ->with('message', 'Type has been added.');
+    }
 }
