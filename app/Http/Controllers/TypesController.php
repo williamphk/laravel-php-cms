@@ -42,4 +42,24 @@ class TypesController extends Controller
         return redirect('/console/types/list')
             ->with('message', 'Type has been added.');
     }
+
+    public function editForm(Type $type)
+    {
+        return view('types.edit',
+            [
+                'type' => $type
+            ]);
+    }
+
+    public function edit(Type $type)
+    {
+        $attribute = request() -> validate([
+            'title' => 'required'
+        ]);
+        $type->title = $attribute['title'];
+        $type->save();
+
+        return redirect('/console/types/list')
+            ->with('message', 'Type has been edited.');
+    }
 }
